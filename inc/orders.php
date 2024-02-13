@@ -6,16 +6,16 @@
 
     final class Orders extends \WC_REST_Orders_Controller{
         public function __construct(){
-            register_rest_route(
-                'wc-ziosync/'.ZioSync::version(),
-                'orders',
-                array(
-                    'methods'             => 'GET',
-                    'callback'            => array($this, 'get_items'),
-                    'permission_callback' => array($this, 'get_items_permissions_check'),
-                    'args'                => $this->get_collection_params(),
-                )
-            );
+//            register_rest_route(
+//                'wc-ziosync/'.ZioSync::version(),
+//                'orders',
+//                array(
+//                    'methods'             => 'GET',
+//                    'callback'            => array($this, 'get_items'),
+//                    'permission_callback' => array($this, 'get_items_permissions_check'),
+//                    'args'                => $this->get_collection_params(),
+//                )
+//            );
 
             register_rest_route(
                 'wc-ziosync/'.ZioSync::version(),

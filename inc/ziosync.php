@@ -12,6 +12,7 @@
         public static function include(){
             require_once(__DIR__.'/customers.php');
             require_once(__DIR__.'/orders.php');
+//            require_once(__DIR__.'/OrdersGetWithoutMetaData.php');
             require_once(__DIR__.'/payment-methods.php');
             require_once(__DIR__.'/product-attributes.php');
             require_once(__DIR__.'/product-attribute-terms.php');
@@ -25,6 +26,7 @@
         public static function instances(){
             new Products;
             new Orders;
+            new OrdersGetWithoutMetaData;
             new PaymentMethods;
             new ProductAttributes;
             new ProductAttributeTerms;

@@ -1,24 +1,21 @@
 <?php
-    namespace ZioSync\inc;
-    use function ZioSync\register_rest_route;
-    use function ZioSync\wc_get_order_statuses;
-
+    namespace ZioSync;
     if (!defined('ABSPATH')) {
         exit;
     }
 
     final class Orders extends \WC_REST_Orders_Controller{
         public function __construct(){
-//            register_rest_route(
-//                'wc-ziosync/'.ZioSync::version(),
-//                'orders',
-//                array(
-//                    'methods'             => 'GET',
-//                    'callback'            => array($this, 'get_items'),
-//                    'permission_callback' => array($this, 'get_items_permissions_check'),
-//                    'args'                => $this->get_collection_params(),
-//                )
-//            );
+            register_rest_route(
+                'wc-ziosync/'.ZioSync::version(),
+                'orders',
+                array(
+                    'methods'             => 'GET',
+                    'callback'            => array($this, 'get_items'),
+                    'permission_callback' => array($this, 'get_items_permissions_check'),
+                    'args'                => $this->get_collection_params(),
+                )
+            );
 
             register_rest_route(
                 'wc-ziosync/'.ZioSync::version(),

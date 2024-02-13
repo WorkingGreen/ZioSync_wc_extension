@@ -1,8 +1,5 @@
 <?php
-    namespace ZioSync\inc;
-    use function ZioSync\get_users;
-    use function ZioSync\register_rest_route;
-
+    namespace ZioSync;
     if (!defined('ABSPATH')) {
         exit;
     }

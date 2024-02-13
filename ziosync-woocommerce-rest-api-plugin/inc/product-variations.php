@@ -1,5 +1,5 @@
 <?php
-    namespace ZioSync\inc;
+    namespace ZioSync;
     if (!defined('ABSPATH')) {
         exit;
     }

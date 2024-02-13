@@ -1,15 +1,5 @@
 <?php
-    namespace ZioSync\inc;
-    use function ZioSync\esc_attr;
-    use function ZioSync\get_term;
-    use function ZioSync\get_term_meta;
-    use function ZioSync\get_terms;
-    use function ZioSync\register_rest_route;
-    use function ZioSync\wc_get_product_id_by_sku;
-    use function ZioSync\wc_get_product_types;
-    use function ZioSync\wp_get_attachment_url;
-    use function ZioSync\wp_get_upload_dir;
-
+    namespace ZioSync;
     if (!defined('ABSPATH')) {
         exit;
     }

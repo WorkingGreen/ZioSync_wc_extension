@@ -1,9 +1,9 @@
 <?php
-    namespace ZioSync\inc;
-    use function ZioSync\register_rest_route;
-    use function ZioSync\wp_parse_list;
 
-    if (!defined('ABSPATH')) {
+use function ZioSync\register_rest_route;
+use function ZioSync\wp_parse_list;
+
+if (!defined('ABSPATH')) {
         exit;
     }
 

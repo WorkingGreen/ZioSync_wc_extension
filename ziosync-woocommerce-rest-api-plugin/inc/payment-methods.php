@@ -1,14 +1,16 @@
 <?php
-    namespace ZioSync;
+    namespace ZioSync\inc;
+    use function ZioSync\register_rest_route;
+
     if (!defined('ABSPATH')) {
         exit;
     }
 
-    final class ShippingMethods extends \WC_REST_Shipping_Methods_Controller{
+    final class PaymentMethods extends \WC_REST_Payment_Gateways_Controller{
         public function __construct(){
             register_rest_route(
                 'wc-ziosync/'.ZioSync::version(),
-                'shipping_methods',
+                'payment_methods',
                 array(
                     'methods'             => 'GET',
                     'callback'            => array($this, 'get_items'),
@@ -19,7 +21,7 @@
     
             register_rest_route(
                 'wc-ziosync/'.ZioSync::version(),
-                'shipping_methods/(?P<id>[\S]+)',
+                'payment_methods/(?P<id>[\S]+)',
                 array(
                     'methods'             => 'GET',
                     'callback'            => array($this, 'get_item'),

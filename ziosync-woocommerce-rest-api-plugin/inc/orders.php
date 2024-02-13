@@ -1,5 +1,8 @@
 <?php
-    namespace ZioSync;
+    namespace ZioSync\inc;
+    use function ZioSync\register_rest_route;
+    use function ZioSync\wc_get_order_statuses;
+
     if (!defined('ABSPATH')) {
         exit;
     }

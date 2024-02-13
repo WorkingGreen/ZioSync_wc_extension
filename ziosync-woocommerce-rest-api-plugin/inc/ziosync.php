@@ -1,5 +1,5 @@
 <?php
-    namespace ZioSync;
+    namespace ZioSync\inc;
 
     
 
@@ -12,7 +12,7 @@
         public static function include(){
             require_once(__DIR__.'/customers.php');
             require_once(__DIR__.'/orders.php');
-//            require_once(__DIR__.'/OrdersGetWithoutMetaData.php');
+            require_once(__DIR__.'/OrdersGetWithoutMetaData.php');
             require_once(__DIR__.'/payment-methods.php');
             require_once(__DIR__.'/product-attributes.php');
             require_once(__DIR__.'/product-attribute-terms.php');

@@ -13,7 +13,7 @@
 
     namespace ZioSync;
 
-    require_once __DIR__.'/inc/ziosync.php';
+    require_once __DIR__ . '/inc/ziosync.php';
 
     if (!defined('ABSPATH')) {
         exit;

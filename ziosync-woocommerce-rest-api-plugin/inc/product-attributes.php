@@ -1,15 +1,17 @@
 <?php
-    namespace ZioSync;
+    namespace ZioSync\inc;
+    use function ZioSync\register_rest_route;
+
     if (!defined('ABSPATH')) {
         exit;
     }
 
-    final class ProductAttributeTerms extends \WC_REST_Product_Attribute_Terms_Controller
+    final class ProductAttributes extends \WC_REST_Product_Attributes_Controller
     {
         public function __construct(){
             register_rest_route(
                 'wc-ziosync/'.ZioSync::version(),
-                'products/attributes/(?P<attribute_id>[\d]+)/terms',
+                'products/attributes',
                 array(
                     'methods'             => 'GET',
                     'callback'            => array($this, 'get_items'),
@@ -20,7 +22,7 @@
     
             register_rest_route(
                 'wc-ziosync/'.ZioSync::version(),
-                'products/attributes/(?P<attribute_id>[\d]+)/terms/(?P<id>[\S]+)',
+                'products/attributes/(?P<id>[\S]+)',
                 array(
                     'methods'             => 'GET',
                     'callback'            => array($this, 'get_item'),

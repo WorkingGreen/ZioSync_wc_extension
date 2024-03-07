@@ -18,6 +18,16 @@
             );
             register_rest_route(
                 'wc-ziosync/'.ZioSync::version(),
+                'tax_classes_with_rates',
+                array(
+                    'methods'             => 'GET',
+                    'callback'            => array($this, 'get_items_with_rates'),
+                    'permission_callback' => array($this, 'get_items_permissions_check'),
+                    'args'                => $this->get_collection_params(),
+                )
+            );
+            register_rest_route(
+                'wc-ziosync/'.ZioSync::version(),
                 'tax_classes/(?P<slug>[\S]+)/(?P<region>[\S]+)',
                 array(
                     'methods'             => 'GET',
@@ -37,6 +47,18 @@
                 )
             );
             
+        }
+
+        public function get_items_with_rates($request){
+            $tax_classes_responses = $this->get_items($request);
+            $tax_classes_array = $tax_classes_responses->get_data();
+
+            foreach($tax_classes_array as &$tax_class){
+                $rates = \WC_Tax::get_rates_for_tax_class( $tax_class['slug'] );
+                $tax_class['rates'] = $rates;
+            }
+
+            return rest_ensure_response($tax_classes_array);
         }
 
         public function get_item($request){

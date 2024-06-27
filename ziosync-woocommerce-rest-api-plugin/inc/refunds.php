@@ -23,7 +23,8 @@
                 array(
                     'methods'             => 'GET',
                     'callback'            => array($this, 'get_items'),
-                    'permission_callback' => array($this, 'get_item_permissions_check'),
+                    'permission_callback' => array($this, 'get_items_permissions_check'),
+                    'args'                => $this->get_collection_params(),
                 )
             );
 
@@ -32,8 +33,9 @@
                 'orders/(?P<order_id>[\d]+)/refunds/(?P<id>[\d]+)',
                 array(
                     'methods'             => 'GET',
-                    'callback'            => array($this, 'get_order_refund'),
+                    'callback'            => array($this, 'get_item'),
                     'permission_callback' => array($this, 'get_item_permissions_check'),
+                    'args'                => $this->get_collection_params(),
                 )
             );
         }

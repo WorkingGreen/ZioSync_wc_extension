@@ -20,6 +20,7 @@
             require_once(__DIR__.'/refunds.php');
             require_once(__DIR__.'/shipping-methods.php');
             require_once(__DIR__.'/tax.php');
+            require_once(__DIR__.'/data.php');
         }
 
         public static function instances(){
@@ -33,6 +34,7 @@
             new ShippingMethods;
             new Tax;
             new Customers;
+            new Data;
         }
 
         public static function init(){

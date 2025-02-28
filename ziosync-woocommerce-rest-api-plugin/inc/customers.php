@@ -11,7 +11,7 @@
                 'customers',
                 array(
                     'methods'             => 'GET',
-                    'callback'            => array($this, 'items'),
+                    'callback'            => array($this, 'get_items'),
                     'permission_callback' => array($this, 'get_items_permissions_check'),
                     'args'                => $this->get_collection_params(),
                 )

@@ -53,19 +53,23 @@
             );
         }
 
-        // Allow sorting by modified_date
-        if ($request->get_param('orderby') === 'modified_date') {
+        return $prepared_args;
+    }
+    add_filter('woocommerce_rest_customer_query', 'ZioSync\add_modified_after_filter_to_rest_api', 10, 2);
+
+    function add_orderby_modified_filter_to_rest_api($prepared_args, $request)
+    {
+        if($request->get_param('orderby_modified')){
+
+            // check if the orderby_modified is set to either asc or desc, otherwise set it to asc
+            if($request->get_param('orderby_modified') !== 'asc' && $request->get_param('orderby_modified') !== 'desc') {
+                $request->set_param('orderby_modified', 'asc');
+            }
+            $prepared_args['order'] = $request->get_param('orderby_modified');
             $prepared_args['orderby'] = 'meta_value';
             $prepared_args['meta_key'] = 'last_update'; // Ensure the key exists in meta
         }
 
         return $prepared_args;
     }
-    add_filter('woocommerce_rest_customer_query', 'ZioSync\add_modified_after_filter_to_rest_api', 10, 2);
-
-    // Allow 'modified_date' as a valid orderby value
-    function add_custom_orderby_to_rest_api($orderby_values) {
-        $orderby_values[] = 'modified_date';
-        return $orderby_values;
-    }
-    add_filter('woocommerce_rest_customers_collection_params', 'ZioSync\add_custom_orderby_to_rest_api');
+    add_filter('woocommerce_rest_customer_query', 'ZioSync\add_orderby_modified_filter_to_rest_api', 10, 2);

@@ -48,7 +48,7 @@
                 array(
                     'key'     => 'last_update',
                     'value'   => (int) strtotime($request->get_param('modified_after')),
-                    'compare' => '>=',
+                    'compare' => '>',
                 ),
             );
         }

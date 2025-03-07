@@ -42,34 +42,56 @@
      */
     // Filter to add modified_after filter to the listing of all customers endpoints
     function add_modified_after_filter_to_rest_api($prepared_args, $request)
-    {
-        if($request->get_param('modified_after')){
-            $prepared_args['meta_query'] = array(
-                array(
-                    'key'     => 'last_update',
-                    'value'   => (int) strtotime($request->get_param('modified_after')),
-                    'compare' => '>',
-                ),
-            );
+{
+    global $wpdb;
+
+    if ($request->get_param('modified_after')) {
+        $timestamp = (int) strtotime($request->get_param('modified_after'));
+
+        // Fetch user IDs **before** running WP_User_Query
+        $user_ids = $wpdb->get_col($wpdb->prepare("
+            SELECT user_id FROM {$wpdb->usermeta} 
+            WHERE meta_key = 'last_update' AND meta_value >= %d", 
+            $timestamp
+        ));
+
+        if (!empty($user_ids)) {
+            $prepared_args['include'] = $user_ids; // Filter only relevant users
+        } else {
+            $prepared_args['include'] = array(0);
         }
-
-        return $prepared_args;
     }
-    add_filter('woocommerce_rest_customer_query', 'ZioSync\add_modified_after_filter_to_rest_api', 10, 2);
 
-    function add_orderby_modified_filter_to_rest_api($prepared_args, $request)
-    {
-        if($request->get_param('orderby_modified')){
+    return $prepared_args;
+}
+add_filter('woocommerce_rest_customer_query', 'ZioSync\add_modified_after_filter_to_rest_api', 10, 2);
 
-            // check if the orderby_modified is set to either asc or desc, otherwise set it to asc
-            if($request->get_param('orderby_modified') !== 'asc' && $request->get_param('orderby_modified') !== 'desc') {
-                $request->set_param('orderby_modified', 'asc');
-            }
-            $prepared_args['order'] = $request->get_param('orderby_modified');
-            $prepared_args['orderby'] = 'meta_value';
-            $prepared_args['meta_key'] = 'last_update'; // Ensure the key exists in meta
+
+function add_orderby_modified_filter_to_rest_api($prepared_args, $request)
+{
+    global $wpdb;
+
+    if ($request->get_param('orderby_modified')) {
+        if (!in_array($request->get_param('orderby_modified'), ['asc', 'desc'])) {
+            $request->set_param('orderby_modified', 'asc');
         }
+        $order = strtoupper($request->get_param('orderby_modified'));
 
-        return $prepared_args;
+        // Fetch sorted user IDs **before** running WP_User_Query
+        $user_ids = $wpdb->get_col("
+            SELECT user_id FROM {$wpdb->usermeta} 
+            WHERE meta_key = 'last_update' 
+            ORDER BY meta_value $order
+            LIMIT 1000
+        ");
+
+        if (!empty($user_ids)) {
+            $prepared_args['include'] = $user_ids;
+        } else {
+            $prepared_args['include'] = array(0);
+        }
     }
+
+    return $prepared_args;
+}
     add_filter('woocommerce_rest_customer_query', 'ZioSync\add_orderby_modified_filter_to_rest_api', 10, 2);

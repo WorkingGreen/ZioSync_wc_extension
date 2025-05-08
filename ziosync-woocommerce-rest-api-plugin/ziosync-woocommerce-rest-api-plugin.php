@@ -48,11 +48,17 @@
     if ($request->get_param('modified_after')) {
         $timestamp = (int) strtotime($request->get_param('modified_after'));
 
+        // get per_page limit or set to 100
+        $per_page = $request->get_param('per_page') ? (int) $request->get_param('per_page') : 100;
+
         // Fetch user IDs **before** running WP_User_Query
         $user_ids = $wpdb->get_col($wpdb->prepare("
             SELECT user_id FROM {$wpdb->usermeta} 
-            WHERE meta_key = 'last_update' AND meta_value >= %d", 
-            $timestamp
+            WHERE meta_key = 'last_update' AND meta_value >= %d
+            ORDER BY meta_value ASC
+            LIMIT %d
+            ",
+            $timestamp, $per_page
         ));
 
         if (!empty($user_ids)) {

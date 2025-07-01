@@ -47,7 +47,7 @@
                     'ping',
                     array(
                         'methods'             => 'GET',
-                        'callback'            => array($this, 'version'),
+                        'callback'            => array(self::class, 'version'),
                         'permission_callback' => '__return_true',
                     )
                 );

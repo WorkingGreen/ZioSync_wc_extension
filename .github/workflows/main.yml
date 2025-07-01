@@ -31,15 +31,33 @@ jobs:
     # - name: Build project (Optional, if your folder needs to be generated)
     #   # run: npm run build # Example: Replace with your actual build command
 
+    - name: Get tag name
+      id: get_tag
+      run: |
+        # Use GITHUB_REF_NAME which already gives the clean tag/branch name
+        # If triggered by a tag push, GITHUB_REF_NAME will be the tag name (e.g., v1.0.0)
+        # If triggered by workflow_dispatch, it will be the branch name (e.g., main)
+        # or the input provided.
+
+        TAG_NAME=""
+        if [ "${{ github.event_name }}" == "push" ]; then
+          # For tag pushes, GITHUB_REF_NAME is already the clean tag
+          TAG_NAME="${{ github.ref_name }}"
+        elif [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+          # For manual dispatch, prioritize the input, then a default with timestamp
+          if [ -n "${{ github.event.inputs.release_tag }}" ]; then
+            TAG_NAME="${{ github.event.inputs.release_tag }}"
+          else
+            TAG_NAME="manual-release-$(date +%Y%m%d%H%M%S)"
+          fi
+        fi
+        echo "TAG_NAME=$TAG_NAME" >> $GITHUB_OUTPUT
+
     - name: Create zip archive of specific folder
       run: |
         FOLDER_TO_ZIP="ziosync-woocommerce-rest-api-plugin" # Change this to your desired folder name
         ZIP_FILE_NAME="ziosync-woocommerce-rest-api-plugin.zip" # Change this to your desired zip file name
         zip -r $ZIP_FILE_NAME $FOLDER_TO_ZIP
-
-    - name: Get tag name
-      id: get_tag
-      run: echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
 
     - name: Create Release
       id: create_release

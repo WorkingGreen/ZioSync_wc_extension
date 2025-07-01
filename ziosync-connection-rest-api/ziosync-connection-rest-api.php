@@ -35,7 +35,7 @@
     function ziosync_no_woocommerce_notice(){
         ?>
             <div class="error notice">
-                <p><b><?php esc_html_e('ZioSync - Woocommerce REST API Plugin requires WooCommerce to be installed and active.', 'ziosync-woocommerce-rest-api'); ?></b></p>
+                <p><b><?php esc_html_e('ZioSync - Woocommerce REST API Plugin requires WooCommerce to be installed and active.', 'ziosync-connection-rest-api'); ?></b></p>
             </div>
         <?php
     }

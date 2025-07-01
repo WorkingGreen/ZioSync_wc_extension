@@ -55,8 +55,8 @@ jobs:
 
     - name: Create zip archive of specific folder
       run: |
-        FOLDER_TO_ZIP="ziosync-woocommerce-rest-api-plugin" # Change this to your desired folder name
-        ZIP_FILE_NAME="ziosync-woocommerce-rest-api-plugin.zip" # Change this to your desired zip file name
+        FOLDER_TO_ZIP="ziosync-woocommerce-rest-api-plugin"
+        ZIP_FILE_NAME="ziosync-woocommerce-rest-api-plugin.zip"
         zip -r $ZIP_FILE_NAME $FOLDER_TO_ZIP
 
     - name: Create Release
@@ -68,6 +68,6 @@ jobs:
         draft: false
         prerelease: false
         files: |
-          ziosync-woocommerce-rest-api-plugin.zip # Path to your generated zip file
+          ziosync-woocommerce-rest-api-plugin.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is automatically provided by GitHub

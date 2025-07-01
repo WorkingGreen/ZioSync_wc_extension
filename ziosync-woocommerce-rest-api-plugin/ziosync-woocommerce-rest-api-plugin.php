@@ -9,6 +9,7 @@
     *    Text Domain: ziosync-woocommerce-rest-api
     *    Requires PHP: 7.2
     *    Requires at least: 5.8
+    *    License: GPLv2
     *    License URI: https://www.gnu.org/licenses/gpl-2.0.html
     *    Requires Plugins: woocommerce
     */

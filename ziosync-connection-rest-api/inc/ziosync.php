@@ -41,17 +41,15 @@
             self::include();
             self::instances();
 
-            add_action('plugin_specific_routes', function () {
-                register_rest_route(
-                    'wc-ziosync/'.self::version(),
-                    'ping',
-                    array(
-                        'methods'             => 'GET',
-                        'callback'            => array(self::class, 'version'),
-                        'permission_callback' => '__return_true',
-                    )
-                );
-            });
+            register_rest_route(
+                'wc-ziosync/'.self::version(),
+                'ping',
+                array(
+                    'methods'             => 'GET',
+                    'callback'            => array(self::class, 'version'),
+                    'permission_callback' => '__return_true',
+                )
+            );
         }
 
         public static function version(){

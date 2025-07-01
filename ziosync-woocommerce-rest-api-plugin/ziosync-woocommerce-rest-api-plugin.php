@@ -6,9 +6,11 @@
     *    Plugin URI: https://ziosync.com
     *    Author URI: https://ziosync.com
     *    Version: 1.0
-    *    Text Domain: ziosync-woocommerce
+    *    Text Domain: ziosync-woocommerce-rest-api-plugin
     *    Requires PHP: 7.2
     *    Requires at least: 5.8
+    *    License URI: https://www.gnu.org/licenses/gpl-2.0.html
+    *    Requires Plugins: woocommerce
     */
 
     namespace ZioSync;
@@ -32,7 +34,7 @@
     function ziosync_no_woocommerce_notice(){
         ?>
             <div class="error notice">
-                <p><b><?php _e('ZioSync - Woocommerce REST API Plugin requires WooCommerce to be installed and active.', 'ziosync-woocommerce'); ?></b></p>
+                <p><b><?php esc_html_e('ZioSync - Woocommerce REST API Plugin requires WooCommerce to be installed and active.', 'ziosync-woocommerce-rest-api-plugin'); ?></b></p>
             </div>
         <?php
     }

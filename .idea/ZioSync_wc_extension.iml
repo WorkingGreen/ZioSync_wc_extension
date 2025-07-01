@@ -2,7 +2,7 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/ziosync-woocommerce-rest-api/inc" isTestSource="false" packagePrefix="ZioSync" />
+      <sourceFolder url="file://$MODULE_DIR$/ziosync-connection-rest-api/inc" isTestSource="false" packagePrefix="ZioSync" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

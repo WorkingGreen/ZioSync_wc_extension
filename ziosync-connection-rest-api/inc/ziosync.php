@@ -41,7 +41,7 @@
             self::include();
             self::instances();
 
-            add_action('rest_api_init', function () {
+            add_action('plugin_specific_routes', function () {
                 register_rest_route(
                     'wc-ziosync/'.self::version(),
                     'ping',

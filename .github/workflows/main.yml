@@ -1,0 +1,49 @@
+name: Create Release with Zipped Folder
+
+on:
+  push:
+    tags:
+      - 'v*' # This workflow will run whenever a tag starting with 'v' is pushed
+
+jobs:
+  build_and_release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js (Optional, only if your build process needs it)
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20' # Or your desired Node.js version
+
+    - name: Install dependencies (Optional, if your folder contains project dependencies)
+      # cd my_build_output # Uncomment if you need to run npm install inside the folder
+      # run: npm install
+
+    - name: Build project (Optional, if your folder needs to be generated)
+      # run: npm run build # Example: Replace with your actual build command
+
+    - name: Create zip archive of specific folder
+      run: |
+        FOLDER_TO_ZIP="ziosync-woocommerce-rest-api-plugin" # Change this to your desired folder name
+        ZIP_FILE_NAME="ziosync-woocommerce-rest-api-plugin.zip" # Change this to your desired zip file name
+        zip -r $ZIP_FILE_NAME $FOLDER_TO_ZIP
+
+    - name: Get tag name
+      id: get_tag
+      run: echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
+    - name: Create Release
+      id: create_release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: ${{ steps.get_tag.outputs.TAG_NAME }}
+        name: Release ${{ steps.get_tag.outputs.TAG_NAME }}
+        draft: false
+        prerelease: false
+        files: |
+          ziosync-woocommerce-rest-api-plugin.zip # Path to your generated zip file
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is automatically provided by GitHub

@@ -3,7 +3,6 @@
     *    Plugin Name: ZioSync Connection REST API
     *    Description: Plugin needed for connection to the woocommerce page, used by ZioSync.
     *    Author: ZioSync
-    *    Plugin URI: https://ziosync.com
     *    Author URI: https://ziosync.com
     *    Version: 1.0
     *    Text Domain: ziosync-connection-rest-api

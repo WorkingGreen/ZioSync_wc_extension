@@ -55,7 +55,7 @@ jobs:
 
     - name: Create zip archive of specific folder
       run: |
-        FOLDER_TO_ZIP="ziosync-woocommerce-rest-api-plugin"
+        FOLDER_TO_ZIP="ziosync-woocommerce-rest-api"
         ZIP_FILE_NAME="ziosync-woocommerce-rest-api-plugin.zip"
         zip -r $ZIP_FILE_NAME $FOLDER_TO_ZIP
 

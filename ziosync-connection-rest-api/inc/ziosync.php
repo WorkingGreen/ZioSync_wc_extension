@@ -40,6 +40,18 @@
         public static function init(){
             self::include();
             self::instances();
+
+            add_action('rest_api_init', function () {
+                register_rest_route(
+                    'wc-ziosync/'.self::version(),
+                    'ping',
+                    array(
+                        'methods'             => 'GET',
+                        'callback'            => array($this, 'version'),
+                        'permission_callback' => '__return_true',
+                    )
+                );
+            });
         }
 
         public static function version(){

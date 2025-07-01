@@ -18,12 +18,12 @@ jobs:
       with:
         node-version: '20' # Or your desired Node.js version
 
-    - name: Install dependencies (Optional, if your folder contains project dependencies)
-      # cd my_build_output # Uncomment if you need to run npm install inside the folder
-      # run: npm install
+    # - name: Install dependencies (Optional, if your folder contains project dependencies)
+    #   # cd my_build_output # Uncomment if you need to run npm install inside the folder
+    #   # run: npm install
 
-    - name: Build project (Optional, if your folder needs to be generated)
-      # run: npm run build # Example: Replace with your actual build command
+    # - name: Build project (Optional, if your folder needs to be generated)
+    #   # run: npm run build # Example: Replace with your actual build command
 
     - name: Create zip archive of specific folder
       run: |

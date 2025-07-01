@@ -71,3 +71,28 @@ jobs:
           ziosync-woocommerce-rest-api-plugin.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is automatically provided by GitHub
+    - name: Remove Source Code Assets
+      uses: actions/github-script@v7
+      with:
+        script: |
+          // Get the release that was just created
+          const release = await github.rest.repos.getRelease({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            release_id: ${{ steps.create_release.outputs.id }}
+          });
+
+          // Find the source code assets by their default names
+          const sourceAssets = release.data.assets.filter(asset =>
+            asset.name.startsWith('Source code')
+          );
+
+          // Delete each source code asset
+          for (const asset of sourceAssets) {
+            console.log('Deleting asset:', asset.name);
+            await github.rest.repos.deleteReleaseAsset({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              asset_id: asset.id,
+            });
+          }

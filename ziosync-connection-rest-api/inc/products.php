@@ -92,12 +92,12 @@
                 ]
             );
 
-            register_rest_route('wc-ziosync/'.ZioSync::version(), 'products/categories', [
-                    'methods'             => 'GET',
-                    'callback'            => [$this, 'categories'],
-                    'permission_callback' => '__return_true',
-                ]
-            );
+//            register_rest_route('wc-ziosync/'.ZioSync::version(), 'products/categories', [
+//                    'methods'             => 'GET',
+//                    'callback'            => [$this, 'categories'],
+//                    'permission_callback' => '__return_true',
+//                ]
+//            );
 
             register_rest_route('wc-ziosync/'.ZioSync::version(), 'products/categories' . '/(?P<id>[\d]+)', [
                     'methods'             => 'GET',
@@ -227,19 +227,19 @@
             return wc_get_product_types();
         }
 
-        public function categories($request)
-        {
-
-            $terms = get_terms('product_cat', [
-                'hide_empty'=>false,
-                'fields'=>'ids',
-            ]);
-            $temp = $this->get_product_category;
-            return array_map(function($term)use($temp, $request){
-                return $temp($request, $term);
-            }, $terms);
-
-        }
+//        public function categories($request)
+//        {
+//
+//            $terms = get_terms('product_cat', [
+//                'hide_empty'=>false,
+//                'fields'=>'ids',
+//            ]);
+//            $temp = $this->get_product_category;
+//            return array_map(function($term)use($temp, $request){
+//                return $temp($request, $term);
+//            }, $terms);
+//
+//        }
 
         public function category($request, $term_id = null)
         {

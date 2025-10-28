@@ -69,31 +69,33 @@
 //add_filter('woocommerce_rest_customer_query', 'ZioSync\add_modified_after_filter_to_rest_api', 10, 2);
 
 
-function add_orderby_modified_filter_to_rest_api($prepared_args, $request)
-{
-    global $wpdb;
+    function add_orderby_modified_filter_to_rest_api($prepared_args, $request)
+    {
+        global $wpdb;
 
-    if ($request->get_param('orderby_modified')) {
-        if (!in_array($request->get_param('orderby_modified'), ['asc', 'desc'])) {
-            $request->set_param('orderby_modified', 'asc');
+        if ($request->get_param('orderby_modified')) {
+            $order = 'ASC'; // Default order direction
+            $orderby_modified = strtolower($request->get_param('orderby_modified'));
+
+            if ('desc' === $orderby_modified) {
+                $order = 'DESC';
+            }
+
+            // Using $wpdb->prepare for the query
+            $user_ids = $wpdb->get_col( $wpdb->prepare( "
+                SELECT user_id FROM {$wpdb->usermeta}
+                WHERE meta_key = 'last_update'
+                ORDER BY meta_value %s
+                LIMIT 1000
+            ", $order ) );
+
+            if (!empty($user_ids)) {
+                $prepared_args['include'] = $user_ids;
+            } else {
+                $prepared_args['include'] = array(0);
+            }
         }
-        $order = strtoupper($request->get_param('orderby_modified'));
 
-        // Fetch sorted user IDs **before** running WP_User_Query
-        $user_ids = $wpdb->get_col("
-            SELECT user_id FROM {$wpdb->usermeta} 
-            WHERE meta_key = 'last_update' 
-            ORDER BY meta_value $order
-            LIMIT 1000
-        ");
-
-        if (!empty($user_ids)) {
-            $prepared_args['include'] = $user_ids;
-        } else {
-            $prepared_args['include'] = array(0);
-        }
+        return $prepared_args;
     }
-
-    return $prepared_args;
-}
 //    add_filter('woocommerce_rest_customer_query', 'ZioSync\add_orderby_modified_filter_to_rest_api', 10, 2);

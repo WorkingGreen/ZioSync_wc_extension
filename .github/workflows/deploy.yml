@@ -21,6 +21,7 @@ jobs:
       - name: 'Validate Versions'
         run: |
           MAIN_PLUGIN_FILE="ziosync-connection-rest-api/ziosync-connection-rest-api.php"
+          MAIN_README_FILE="ziosync-connection-rest-api/readme.txt"
 
           # 1. Get version from GitHub release tag (e.g., 'v1.2.3' -> '1.2.3')
           GITHUB_TAG_VERSION="${{ github.ref_name }}"
@@ -28,7 +29,7 @@ jobs:
           
           # 2. Get 'Stable tag' from readme.txt
           # Splits at the colon and trims whitespace
-          README_VERSION=$(grep -i "Stable tag:" readme.txt | awk -F':' '{print $2}' | xargs)
+          README_VERSION=$(grep -i "Stable tag:" $MAIN_README_FILE | awk -F':' '{print $2}' | xargs)
           
           # 3. Get 'Version:' from main plugin file header
           # Finds the first line starting with ' * Version:' or 'Version:',

@@ -35,7 +35,7 @@ jobs:
           # 3. Get 'Version:' from main plugin file header
           # Finds the first line starting with ' * Version:' or 'Version:',
           # splits at the colon, and trims whitespace.
-          PLUGIN_FILE_VERSION=$(grep -i "^ * Version:" $MAIN_PLUGIN_FILE | head -n 1 | awk -F':' '{print $2}' | xargs)
+          PLUGIN_FILE_VERSION=$(grep -i "^ \* *Version:" $MAIN_PLUGIN_FILE | head -n 1 | awk -F':' '{print $2}' | xargs)
           
           # Print all versions for debugging
           echo "Release Tag:         $RELEASE_VERSION"

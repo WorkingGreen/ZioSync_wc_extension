@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <linearGradient id="paint0_linear_1141_1327" x1="236.909" y1="364.167" x2="289.441" y2="416.699" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1, 0, 0, 1, 1.685165, 2.712235)">
+      <stop stop-color="#D94400"/>
+      <stop offset="1" stop-color="#F26322"/>
+      <stop offset="1" stop-color="#F26322"/>
+      <stop offset="1" stop-color="#F77123"/>
+    </linearGradient>
+    <linearGradient id="paint1_linear_1141_1327" x1="240.414" y1="373.718" x2="205.409" y2="57.6256" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1, 0, 0, 1, 1.685165, 2.712235)">
+      <stop stop-color="#3367E3"/>
+      <stop offset="1" stop-color="#8CC8FF"/>
+    </linearGradient>
+    <linearGradient id="paint2_linear_1141_1327" x1="150.947" y1="235.224" x2="77.5928" y2="333.029" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1, 0, 0, 1, 1.685165, 2.712235)">
+      <stop stop-color="#243BCA"/>
+      <stop offset="1" stop-color="#3367E3"/>
+    </linearGradient>
+    <bx:export>
+      <bx:file format="svg" normalization="{&quot;removeBoxySVGMetadata&quot;:true}" path="Ziosync_logo.svg"/>
+      <bx:file format="svg" href="#object-0" path="Untitled 2.svg"/>
+    </bx:export>
+  </defs>
+  <rect width="433.375" height="445.436" fill="white" x="37.417" y="26.881" style="stroke-width: 1;" id="object-0"/>
+  <path d="M 152.632 304.796 L 364.399 304.796 C 369.466 304.796 374.324 306.809 377.907 310.391 L 422.866 355.35 C 426.596 359.08 426.596 365.128 422.866 368.858 L 377.907 413.817 C 374.324 417.399 369.466 419.412 364.399 419.412 L 152.632 419.412 L 152.632 304.796 Z" fill="#F26322" style="stroke-width: 1;"/>
+  <path d="M 152.632 304.796 L 364.399 304.796 C 369.466 304.796 374.324 306.809 377.907 310.391 L 422.866 355.35 C 426.596 359.08 426.596 365.128 422.866 368.858 L 377.907 413.817 C 374.324 417.399 369.466 419.412 364.399 419.412 L 152.632 419.412 L 152.632 304.796 Z" fill="url(#paint0_linear_1141_1327)" style="stroke-width: 1;"/>
+  <path d="M 98.597 75.846 C 128.442 46.005 176.822 46.005 206.662 75.846 L 341.738 210.922 C 356.658 225.842 356.658 250.032 341.738 264.952 L 206.662 400.028 L 152.632 345.998 C 122.787 316.158 122.787 267.777 152.632 237.937 L 98.597 183.907 C 68.767 154.067 68.767 105.686 98.597 75.846 Z" fill="#D9D9D9" style="stroke-width: 1;"/>
+  <path d="M 98.597 75.846 C 128.442 46.005 176.822 46.005 206.662 75.846 L 341.738 210.922 C 356.658 225.842 356.658 250.032 341.738 264.952 L 206.662 400.028 L 152.632 345.998 C 122.787 316.158 122.787 267.777 152.632 237.937 L 98.597 183.907 C 68.767 154.067 68.767 105.686 98.597 75.846 Z" fill="url(#paint1_linear_1141_1327)" style="stroke-width: 1;"/>
+  <path d="M 152.632 237.937 L 206.662 291.967 C 236.502 321.807 236.502 370.188 206.662 400.028 C 176.822 429.868 128.442 429.868 98.597 400.028 C 68.767 370.188 68.767 321.807 98.597 291.967 L 152.632 237.937 Z" fill="#D9D9D9" style="stroke-width: 1;"/>
+  <path d="M 152.632 237.937 L 206.662 291.967 C 236.502 321.807 236.502 370.188 206.662 400.028 C 176.822 429.868 128.442 429.868 98.597 400.028 C 68.767 370.188 68.767 321.807 98.597 291.967 L 152.632 237.937 Z" fill="url(#paint2_linear_1141_1327)" style="stroke-width: 1;"/>
+</svg>

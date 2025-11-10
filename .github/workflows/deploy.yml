@@ -71,13 +71,13 @@ jobs:
         uses: 10up/action-wordpress-plugin-deploy@stable
         with:
           # Your plugin's slug on WordPress.org
-          plugin_slug: 'ziosync-connection-rest-api'
-          plugin_directory: 'ziosync-connection-rest-api'
+          SLUG: 'ziosync-connection-rest-api'
+          BUILD_DIR: 'ziosync-connection-rest-api'
           
           # Optional: Path to a directory of assets
           # assets_dir: '.wordpress-org'
           
         env:
           # Use the secrets you created
-          SVN_USERNAME: ${{ secrets.WORDPRESS_ORG_USERNAME }}
-          SVN_PASSWORD: ${{ secrets.WORDPRESS_ORG_PASSWORD }}
+          SVN_USERNAME: ${{ secrets.WORDPRESS_SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.WORDPRESS_SVN_PASSWORD }}

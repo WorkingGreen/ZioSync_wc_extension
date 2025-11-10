@@ -75,4 +75,4 @@ jobs:
           SVN_PASSWORD: ${{ secrets.WORDPRESS_SVN_PASSWORD }}
           SLUG: ziosync-connection-rest-api
           BUILD_DIR: ziosync-connection-rest-api
-          # ASSETS_DIR: dir
+          ASSETS_DIR: wordpress_assets

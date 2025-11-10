@@ -20,8 +20,9 @@ jobs:
       # and 'Version:' in the main plugin file.
       - name: 'Validate Versions'
         run: |
-          MAIN_PLUGIN_FILE="ziosync-connection-rest-api/ziosync-connection-rest-api.php"
-          MAIN_README_FILE="ziosync-connection-rest-api/readme.txt"
+          PLUGIN_DIR="ziosync-connection-rest-api"
+          MAIN_PLUGIN_FILE="$PLUGIN_DIR/ziosync-connection-rest-api.php"
+          MAIN_README_FILE="$PLUGIN_DIR/readme.txt"
 
           # 1. Get version from GitHub release tag (e.g., 'v1.2.3' -> '1.2.3')
           GITHUB_TAG_VERSION="${{ github.ref_name }}"
@@ -71,6 +72,7 @@ jobs:
         with:
           # Your plugin's slug on WordPress.org
           plugin_slug: 'ziosync-connection-rest-api'
+          plugin_directory: 'ziosync-connection-rest-api'
           
           # Optional: Path to a directory of assets
           # assets_dir: '.wordpress-org'

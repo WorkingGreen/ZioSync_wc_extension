@@ -4,7 +4,7 @@
     *    Description: Plugin needed for connection to the woocommerce page, used by ZioSync.
     *    Author: ZioSync
     *    Author URI: https://ziosync.com
-    *    Version: 1.0.5
+    *    Version: 1.0.6
     *    Text Domain: ziosync-connection-rest-api
     *    Requires PHP: 7.2
     *    Requires at least: 5.8

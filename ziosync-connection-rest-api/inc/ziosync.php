@@ -17,6 +17,7 @@
             require_once(__DIR__.'/product-attribute-terms.php');
             require_once(__DIR__.'/product-variations.php');
             require_once(__DIR__.'/products.php');
+            require_once(__DIR__ . '/order-refunds.php');
             require_once(__DIR__.'/refunds.php');
             require_once(__DIR__.'/shipping-methods.php');
             require_once(__DIR__.'/tax.php');
@@ -31,6 +32,7 @@
             new ProductAttributeTerms;
             new ProductVariations;
             new Refunds;
+            new OrderRefunds;
             new ShippingMethods;
             new Tax;
             new Customers;

@@ -53,10 +53,14 @@
                 ]
             );
 
+            // NOTE: these routes must use get_items_permissions_check(). The inherited
+            // get_item_permissions_check() only enforces a capability when it can resolve a
+            // product from (int) $request['id']; with no numeric 'id' in the route it resolves
+            // nothing and returns true, leaving the endpoint open to unauthenticated callers.
             register_rest_route('wc-ziosync/'.ZioSync::version(), 'products/allby/sku/(?P<sku>[\S]+)', [
                     'methods'             => 'GET',
                     'callback'            => [$this, 'get_items'],
-                    'permission_callback' => [$this, 'get_item_permissions_check'],
+                    'permission_callback' => [$this, 'get_items_permissions_check'],
                     'args'                => $this->get_collection_params(),
                 ]
             );
@@ -64,7 +68,7 @@
             register_rest_route('wc-ziosync/'.ZioSync::version(), 'products/search', [
                     'methods'             => 'GET',
                     'callback'            => [$this, 'search'],
-                    'permission_callback' => [$this, 'get_item_permissions_check'],
+                    'permission_callback' => [$this, 'get_items_permissions_check'],
                     'args'                => $this->get_collection_params(),
                 ]
             );
@@ -72,7 +76,7 @@
             register_rest_route('wc-ziosync/'.ZioSync::version(), 'products/findby/sku/(?P<id>[\S]+)', [
                     'methods'             => 'GET',
                     'callback'            => [$this, 'findby_sku'],
-                    'permission_callback' => [$this, 'get_item_permissions_check'],
+                    'permission_callback' => [$this, 'get_items_permissions_check'],
                     'args'                => $this->get_collection_params(),
                 ]
             );
@@ -270,25 +274,61 @@
         }
 
 
+        /**
+         * Image types accepted for product media, keyed by the MIME type detected from
+         * the decoded bytes. The stored extension is always taken from this map and
+         * never from caller supplied input, so a caller cannot place a .php (or any
+         * other executable) file inside the uploads directory.
+         */
+        private const ALLOWED_MEDIA_TYPES = [
+            'image/jpeg' => 'jpg',
+            'image/png'  => 'png',
+            'image/gif'  => 'gif',
+            'image/webp' => 'webp',
+        ];
+
         private function uploadFile($request)
         {
             if (!isset($request['ziosync_media'])) {
                 return false;
             }
 
-            $dirs = wp_get_upload_dir();
-            $file = $this->upload_item_media($request['ziosync_media'], $dirs['basedir']);
+            $media = $request['ziosync_media'];
 
-            $sku = $media['formatted_sku'];
-            $fn = $sku . '.' . $media['file_extension'];
-            $data = base64_decode($media['media_data_base64_encoded']);
-            $file = file_put_contents($dirs['basedir'] . "/" . $fn, $data);
-
-            if ($file) {
-                return $dirs['baseurl'] . "/" . $fn;
+            if (!is_array($media) || empty($media['media_data_base64_encoded'])) {
+                return false;
             }
 
-            return false;
+            $data = base64_decode($media['media_data_base64_encoded'], true);
+            if (false === $data || '' === $data) {
+                return false;
+            }
+
+            // Derive the type from the actual bytes rather than trusting the caller.
+            $info = @getimagesizefromstring($data);
+            if (!$info || empty($info['mime']) || !isset(self::ALLOWED_MEDIA_TYPES[$info['mime']])) {
+                return false;
+            }
+            $extension = self::ALLOWED_MEDIA_TYPES[$info['mime']];
+
+            // basename() drops any directory traversal, sanitize_file_name() the rest,
+            // and the trailing strip removes a caller supplied extension such as ".php".
+            $name = isset($media['formatted_sku']) ? (string) $media['formatted_sku'] : '';
+            $name = sanitize_file_name(basename($name));
+            $name = preg_replace('/\.[^.]*$/', '', $name);
+            if ('' === $name) {
+                $name = 'product-image';
+            }
+
+            // wp_upload_bits() writes into the uploads dir, guarantees a unique filename
+            // and refuses any extension WordPress does not allow.
+            $upload = wp_upload_bits($name . '.' . $extension, null, $data);
+
+            if (!empty($upload['error']) || empty($upload['url'])) {
+                return false;
+            }
+
+            return $upload['url'];
         }
 
         private function updateStock($request, $product)

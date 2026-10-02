@@ -2,8 +2,8 @@
 Contributors: renszio
 Tags: ziosync, reconcilliation, integration
 Requires at least: 5.8
-Tested up to: 6.8
-Stable tag: 1.0.7
+Tested up to: 7.1
+Stable tag: 1.0.8
 Requires PHP: 7.2
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -15,6 +15,9 @@ This plugin extends the WooCommerce REST API with additional endpoints specifica
 This plugin extends the WooCommerce REST API with additional endpoints specifically designed for seamless integration with ZioSync.
 
 == Changelog ==
+
+= 1.0.8 =
+* Tested up to WordPress 7.1.
 
 = 1.0.7 =
 * Security: product lookup endpoints (search and SKU lookup) now enforce the same capability check as the WooCommerce product collection endpoint.
